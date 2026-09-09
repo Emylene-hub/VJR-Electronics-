@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VJR Electronics — Solar Installation, South Cotabato</title>
+<link rel="icon" href="logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#0a1830;
+    --navy-800:#12233f;
+    --navy-700:#1a3057;
+    --gold:#e8a33d;
+    --gold-soft:#f2c579;
+    --amber:#c97730;
+    --cream:#f5f1e8;
+    --cream-dim:#ece6d8;
+    --ink:#12203c;
+    --ink-soft:#4a5875;
+    --line:#2a3d63;
+    --wire:#5f83b5;
+    --white:#ffffff;
+    --radius-panel: 4px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Sora',sans-serif;
+    font-weight:800;
+    line-height:1.05;
+    margin:0;
+  }
+  p{line-height:1.65; color:var(--ink-soft); margin:0;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  section{position:relative;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(10,24,48,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .nav-inner{
+    max-width:2000px; margin:0 auto; padding: 10px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .brand img{ width:40px; height:40px; border-radius:50%; }
+  .brand-text{ display:flex; flex-direction:column; line-height:1.1; }
+  .brand-text strong{ font-family:'Sora',sans-serif; color:var(--white); font-size:15px; letter-spacing:0.02em; }
+  .brand-text span{ color:var(--gold-soft); font-size:11px; }
+  .nav-cta{
+    background:var(--gold); color:var(--navy-950); font-weight:700;
+    padding:9px 18px; border-radius:2px; font-size:14px;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .nav-cta:hover{ background:var(--gold-soft); transform:translateY(-1px); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--navy-950);
+    min-height:100svh;
+    display:flex; align-items:center;
+    padding:120px 0 60px;
+    overflow:hidden;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.05fr 0.95fr; gap:40px; align-items:center;
+    width:100%;
+  }
+  .badge{
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--line); border-radius:999px;
+    padding:6px 14px; color:var(--gold-soft); font-size:13px; font-weight:600;
+    margin-bottom:22px;
+  }
+  .badge::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--gold); }
+  .hero h1{
+    color:var(--white);
+    font-size:clamp(34px, 4.6vw, 56px);
+    max-width:11ch;
+  }
+  .hero h1 em{ color:var(--gold); font-style:normal; }
+  .hero p.lead{
+    color:#c7d1e6; font-size:17px; max-width:44ch; margin-top:20px;
+  }
+  .hero-actions{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
+  .btn{
+    padding:14px 24px; border-radius:2px; font-weight:700; font-size:15px;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .2s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn-primary{ background:var(--gold); color:var(--navy-950); }
+  .btn-primary:hover{ background:var(--gold-soft); transform:translateY(-2px); }
+  .btn-ghost{ border:1px solid var(--line); color:var(--white); }
+  .btn-ghost:hover{ border-color:var(--wire); transform:translateY(-2px); }
+  .hero-stats{ display:flex; gap:32px; margin-top:44px; }
+  .hero-stats div strong{ display:block; color:var(--white); font-family:'Sora',sans-serif; font-size:22px; }
+  .hero-stats div span{ color:#8ea0c4; font-size:13px; }
+
+  .hero-art{ position:relative; min-height:460px; display:flex; align-items:center; justify-content:center; }
+  .hero-photo{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:1px solid var(--line); }
+  .hero-art::after{ content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(10,24,48,.35),rgba(10,24,48,.04) 65%,rgba(10,24,48,.28)); pointer-events:none; }
+  .hero-art svg{ display:none; }
+
+  /* sunrise animation */
+  .sun-core{ transform-origin: 260px 230px; }
+  .ray{ stroke:var(--gold); stroke-width:3; stroke-linecap:round; opacity:0; }
+  .circuit-line{
+    fill:none; stroke:var(--wire); stroke-width:2;
+    stroke-dasharray:400; stroke-dashoffset:400;
+  }
+  .brand{ fill:var(--navy-950); stroke:var(--wire); stroke-width:2; opacity:0; }
+  .panel-shape{ fill:#19265e; stroke:#2c4675; stroke-width:1.5; }
+  .panel-shine{ fill:rgba(232,163,61,0.14); }
+
+  @keyframes riseUp{
+    from{ transform:translateY(26px) scale(.9); opacity:0; }
+    to{ transform:translateY(0) scale(1); opacity:1; }
+  }
+  @keyframes rayGrow{
+    from{ opacity:0; stroke-dashoffset:60; }
+    to{ opacity:1; stroke-dashoffset:0; }
+  }
+  @keyframes drawLine{ to{ stroke-dashoffset:0; } }
+  @keyframes nodeFade{ to{ opacity:1; } }
+  @keyframes floatSlow{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-8px); }
+  }
+
+  .sun-core{ animation: riseUp 1.4s cubic-bezier(.2,.8,.2,1) both; }
+  .ray{ stroke-dasharray:60; animation: rayGrow 0.9s ease forwards; }
+  .ray:nth-child(1){ animation-delay:.5s; }
+  .ray:nth-child(2){ animation-delay:.58s; }
+  .ray:nth-child(3){ animation-delay:.66s; }
+  .ray:nth-child(4){ animation-delay:.74s; }
+  .ray:nth-child(5){ animation-delay:.82s; }
+  .ray:nth-child(6){ animation-delay:.9s; }
+  .ray:nth-child(7){ animation-delay:.98s; }
+  .circuit-line{ animation: drawLine 1.1s ease forwards; }
+  .circuit-line.l1{ animation-delay:1.0s; }
+  .circuit-line.l2{ animation-delay:1.15s; }
+  .circuit-line.l3{ animation-delay:1.3s; }
+  .circuit-line.l4{ animation-delay:1.45s; }
+  .circuit-node{ animation: nodeFade .3s ease forwards; }
+  .circuit-node.n1{ animation-delay:2.0s; }
+  .circuit-node.n2{ animation-delay:2.15s; }
+  .circuit-node.n3{ animation-delay:2.3s; }
+  .circuit-node.n4{ animation-delay:2.45s; }
+  .hero-art{ animation: floatSlow 7s ease-in-out infinite; animation-delay:2.6s; }
+
+  /* ---------- INTRO ---------- */
+  .intro{ background:var(--cream); padding:96px 0; }
+  .intro-top{ display:grid; grid-template-columns: 1fr 1fr; gap:56px; align-items:start; }
+  .kicker{ color:var(--amber); font-weight:700; font-size:13px; margin-bottom:10px; display:block; }
+  .intro h2{ font-size:clamp(26px,3vw,36px); color:var(--ink); max-width:14ch; }
+  .intro-top p{ font-size:16px; margin-top:6px; }
+  .feature-list{ display:flex; flex-direction:column; gap:22px; }
+  .feature-item{ display:flex; gap:16px; align-items:flex-start; padding-bottom:20px; border-bottom:1px solid var(--cream-dim); }
+  .feature-item:last-child{ border-bottom:none; padding-bottom:0; }
+  .feature-icon{
+    width:44px; height:44px; flex:none; border-radius:50%;
+    background:var(--navy-950); display:flex; align-items:center; justify-content:center;
+  }
+  .feature-icon svg{ width:22px; height:22px; }
+  .feature-item h3{ font-family:'Inter',sans-serif; font-weight:700; font-size:15.5px; color:var(--ink); }
+  .feature-item p{ font-size:14.5px; margin-top:3px; }
+
+  /* ---------- MISSION / VALUES ---------- */
+  .mvv{ background:var(--navy-950); padding:100px 0; color:var(--white); }
+  .mvv-top{ display:grid; grid-template-columns: 1fr 1fr; gap:48px; margin-bottom:80px; }
+  .mvv-block span.k{ color:var(--gold); font-family:'Sora',sans-serif; font-weight:700; letter-spacing:.02em; font-size:14px; }
+  .mvv-block h3{ font-size:22px; margin:10px 0 14px; color:var(--white); }
+  .mvv-block p{ color:#b9c4dd; font-size:15px; }
+  .mvv-divider{ height:1px; background:var(--line); margin:0 0 80px; }
+
+  .values-wrap{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap:56px; align-items:center; }
+  .values-copy h3{ font-size:24px; color:var(--white); max-width:12ch; }
+  .values-copy p{ color:#b9c4dd; margin-top:14px; font-size:15px; max-width:38ch; }
+  .loop-wrap{ position:relative; }
+  .loop-wrap svg{ width:100%; height:auto; }
+  .loop-path{
+    fill:none; stroke:var(--wire); stroke-width:2; stroke-dasharray:900; stroke-dashoffset:900;
+  }
+  .loop-path.drawn{ animation: drawLine 2.2s ease forwards; }
+  .value-node{ opacity:0; transform:scale(.7); transform-origin:center; transition:opacity .5s ease, transform .5s ease; }
+  .value-node.shown{ opacity:1; transform:scale(1); }
+  .value-node circle{ fill:var(--navy-800); stroke:var(--gold); stroke-width:1.6; }
+  .value-node text{ fill:var(--white); font-family:'Inter',sans-serif; font-size:11.5px; font-weight:600; }
+
+  /* ---------- PACKAGES ---------- */
+  .packages{ background:var(--cream); padding:100px 0; }
+  .pkg-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:34px; }
+  .pkg-head h2{ font-size:clamp(26px,3vw,36px); max-width:14ch; }
+  .pkg-head p{ max-width:36ch; font-size:15px; }
+  .tabs{ display:flex; gap:8px; margin-bottom:28px; flex-wrap:wrap; }
+  .tab{
+    padding:10px 20px; border-radius:2px; border:1px solid var(--cream-dim);
+    background:var(--white); font-weight:700; font-size:14px; color:var(--ink-soft);
+    cursor:pointer; transition:all .2s ease;
+  }
+  .tab[aria-selected="true"]{ background:var(--navy-950); color:var(--white); border-color:var(--navy-950); }
+  .tab:hover{ border-color:var(--amber); }
+
+  .tier-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+  .tier-card{
+    background:var(--white); border:1px solid var(--cream-dim); border-radius:3px;
+    padding:26px 24px; display:flex; flex-direction:column; gap:16px;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .tier-card:hover{ transform:translateY(-4px); box-shadow:0 16px 30px -18px rgba(18,32,60,0.35); border-color:var(--amber); }
+  .tier-card .tier-name{ font-family:'Sora',sans-serif; font-weight:700; font-size:18px; color:var(--ink); }
+  .tier-card .tier-tag{ font-size:12.5px; color:var(--amber); font-weight:700; }
+  .tier-specs{ display:flex; flex-direction:column; gap:9px; font-size:13.5px; color:var(--ink-soft); }
+  .tier-specs strong{ color:var(--ink); font-weight:600; }
+  .tier-price{ margin-top:auto; padding-top:14px; border-top:1px solid var(--cream-dim); }
+  .tier-price .amount{ font-family:'Sora',sans-serif; font-size:26px; font-weight:800; color:var(--navy-950); }
+  .tier-price .amount span{ font-size:13px; font-weight:500; color:var(--ink-soft); }
+  .price-bar-track{ height:6px; background:var(--cream-dim); border-radius:4px; margin-top:12px; overflow:hidden; }
+  .price-bar-fill{ height:100%; background:linear-gradient(90deg,var(--amber),var(--gold)); width:0%; border-radius:4px; transition:width 1s cubic-bezier(.2,.8,.2,1); }
+
+  /* ---------- WHY CHOOSE ---------- */
+  .why{ background:var(--white); padding:100px 0; }
+  .why-head{ margin-bottom:52px; max-width:44ch; }
+  .why-head h2{ font-size:clamp(26px,3vw,36px); }
+  .why-head p{ margin-top:12px; font-size:15px; }
+  .why-grid{ display:grid; grid-template-columns: 60px 1fr; gap:0 24px; }
+  .why-rail{ position:relative; display:flex; justify-content:center; }
+  .why-rail svg{ position:absolute; top:0; left:0; width:100%; height:100%; overflow:visible; }
+  .trace-path{ fill:none; stroke:var(--wire); stroke-width:2; stroke-dasharray:1000; stroke-dashoffset:1000; }
+  .trace-path.drawn{ animation: drawLine 2.5s ease forwards; }
+  .trace-dot{ fill:var(--white); stroke:var(--gold); stroke-width:2; opacity:0; }
+  .trace-dot.shown{ opacity:1; transition:opacity .4s ease; }
+  .why-item{ padding:30px 0; border-bottom:1px solid var(--cream-dim); display:flex; flex-direction:column; gap:6px; }
+  .why-item:last-child{ border-bottom:none; }
+  .why-item h3{ font-size:17px; color:var(--ink); }
+  .why-item p{ font-size:14.5px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact{ background:var(--navy-950); padding:100px 0 60px; color:var(--white); position:relative; overflow:hidden; }
+  .contact-inner{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; position:relative; z-index:2; }
+  .contact h2{ font-size:clamp(28px,3.6vw,42px); color:var(--white); max-width:11ch; }
+  .contact h2 em{ color:var(--gold); font-style:normal; }
+  .contact-copy{ color:#b9c4dd; margin-top:16px; max-width:38ch; font-size:15.5px; }
+  .contact-card{
+    background:var(--navy-800); border:1px solid var(--line); border-radius:3px; padding:32px;
+  }
+  .contact-row{ display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--line); align-items:flex-start; }
+  .contact-row:last-child{ border-bottom:none; }
+  .contact-row .ico{ width:34px; height:34px; border-radius:50%; background:var(--navy-950); display:flex; align-items:center; justify-content:center; flex:none; }
+  .contact-row .ico svg{ width:16px; height:16px; }
+  .contact-row div span{ display:block; color:#8ea0c4; font-size:12px; margin-bottom:2px; }
+  .contact-row div strong{ color:var(--white); font-size:15px; font-weight:600; }
+  .contact-row a strong{ transition:color .2s ease; }
+  .contact-row a:hover strong{ color:var(--gold); }
+  .foot{ margin-top:70px; padding-top:24px; border-top:1px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; color:#7488ac; font-size:13px; }
+  .hex-bg{ position:absolute; inset:0; opacity:.12; z-index:1; pointer-events:none; }
+
+  @media (max-width: 860px){
+    .hero-grid, .intro-top, .mvv-top, .values-wrap, .contact-inner{ grid-template-columns:1fr; }
+    .hero{ padding-top:110px; }
+    .hero-art{ order:-1; max-width:520px; width:100%; min-height:360px; margin:0 auto 20px; }
+    .why-grid{ grid-template-columns: 34px 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+    .sun-core,.ray,.circuit-line,.circuit-node{ opacity:1 !important; stroke-dashoffset:0 !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <img src="logo.jpg" alt="VJR Electronics logo">
+      <div class="brand-text">
+        <strong>Vjrtop</strong>
+        <span>Solar Installation Solutions</span>
+      </div>
+    </div>
+    <a class="nav-cta" href="tel:+639625486272">Call 0962-548-6272</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="badge">Serving South Cotabato since 2023</span>
+      <h1>Power your home.<br><em>Protect</em> your future.</h1>
+      <p class="lead">Affordable, upgradable solar energy systems built by certified installers — from a 6kW starter setup to a full 12kW premium system.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://wa.me/639625486272">Book a free site visit</a>
+        <a class="btn btn-ghost" href="#packages">Compare packages</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>6–36</strong><span>panels per system</span></div>
+        <div><strong>32.14 kWh</strong><span>max battery storage</span></div>
+        <div><strong>100%</strong><span>genuine components</span></div>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <img class="hero-photo" src="vjrtop.jpg" alt="Solar panels installed across a residential rooftop in South Cotabato">
+      <svg viewBox="0 0 520 460 "img src="vjr-solar-setup.jpg" role=img aria-label="Illustration of a sunrise over a solar-panelled roof with connected circuit lines">
+        <!-- rays -->
+        <g class="sun-core">
+          <line class="ray" x1="260" y1="230" x2="260" y2="150" transform="rotate(0 260 230)"/>
+          <line class="ray" x1="260" y1="230" x2="260" y2="150" transform="rotate(51 260 230)"/>
+          <line class="ray" x1="260" y1="230" x2="260" y2="150" transform="rotate(102 260 230)"/>
+          <line class="ray" x1="260" y1="230" x2="260" y2="150" transform="rotate(153 260 230)"/>
+          <line class="ray" x1="260" y1="230" x2="260" y2="150" transform="rotate(204 260 230)"/>
+          <line class="ray" x1="260" y1="230" x2="260" y2="150" transform="rotate(255 260 230)"/>
+          <line class="ray" x1="260" y1="230" x2="260" y2="150" transform="rotate(306 260 230)"/>
+          <circle cx="260" cy="230" r="46" fill="url(#sunGrad)"/>
+        </g>
+        <defs>
+          <radialGradient id="sunGrad" cx="50%" cy="45%" r="60%">
+            <stop offset="0%" stop-color="#fbe3ad"/>
+            <stop offset="55%" stop-color="var(--gold)"/>
+            <stop offset="100%" stop-color="var(--amber)"/>
+          </radialGradient>
+        </defs>
+
+        <!-- rooftop with panels -->
+        <polygon class="panel-shape" points="70,340 260,250 450,340 450,300 260,215 70,300"/>
+        <polygon class="panel-shine" points="90,330 260,255 260,270 100,335"/>
+        <polygon class="panel-shine" points="270,255 440,330 430,335 270,270"/>
+        <line x1="90" y1="335" x2="260" y2="258" stroke="#0a1830" stroke-width="1"/>
+        <line x1="260" y1="258" x2="430" y2="335" stroke="#0a1830" stroke-width="1"/>
+
+        <!-- circuit traces radiating like the brand mark -->
+        <path class="circuit-line l1" d="M70,300 L30,300 L30,230 L 5,230"/>
+        <path class="circuit-line l2" d="M450,300 L490,300 L490,230 L 515,230"/>
+        <path class="circuit-line l3" d="M70,340 L20,340 L20,400"/>
+        <path class="circuit-line l4" d="M450,340 L500,340 L500,400"/>
+        <circle class="circuit-node n1" cx="5" cy="230" r="5"/>
+        <circle class="circuit-node n2" cx="515" cy="230" r="5"/>
+        <circle class="circuit-node n3" cx="20" cy="400" r="5"/>
+        <circle class="circuit-node n4" cx="500" cy="400" r="5"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- ================= INTRO ================= -->
+<section class="intro">
+  <div class="wrap">
+    <div class="intro-top">
+      <div>
+        <span class="kicker">Why go solar now</span>
+        <h2>Rising bills call for a system that grows with you.</h2>
+      </div>
+      <p>As electricity costs continue to climb, more homeowners and businesses in South Cotabato are turning to solar to reduce their monthly bills and secure a stable energy supply. Every VJR package is designed to give you maximum value today, with the flexibility to expand as your needs grow.</p>
+    </div>
+
+    <div class="feature-list" style="margin-top:60px; display:grid; grid-template-columns:repeat(4,1fr); gap:32px;">
+      <div class="feature-item" style="border:none; flex-direction:column; align-items:flex-start;">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="1"/><path d="M3 9h18M9 21h6"/></svg></div>
+        <h3>Sungrow hybrid inverters</h3>
+        <p>Premium MG6RL / MG8RL series, matched to your system size.</p>
+      </div>
+      <div class="feature-item" style="border:none; flex-direction:column; align-items:flex-start;">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M4 20l8-16 8 16"/><path d="M8 20l4-8 4 8"/></svg></div>
+        <h3>High-efficiency panels</h3>
+        <p>Upgradable configurations — start with a few, add more later.</p>
+      </div>
+      <div class="feature-item" style="border:none; flex-direction:column; align-items:flex-start;">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="10" y1="7" x2="14" y2="7"/></svg></div>
+        <h3>LiFePO₄ battery storage</h3>
+        <p>Long-life, safe, and stable — also built to upgrade in stages.</p>
+      </div>
+      <div class="feature-item" style="border:none; flex-direction:column; align-items:flex-start;">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M3 21h18M5 21V9l7-6 7 6v12M9 21v-6h6v6"/></svg></div>
+        <h3>Complete install</h3>
+        <p>Materials and professional installation included in every price.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MISSION / VISION / VALUES ================= -->
+<section class="mvv">
+  <div class="wrap">
+    <div class="mvv-top">
+      <div class="mvv-block">
+        <span class="k">VISION</span>
+        <h3>The most trusted solar installer in South Cotabato and beyond.</h3>
+        <p>Recognized for reliable craftsmanship, scalable solar solutions, and a genuine commitment to helping communities transition to sustainable, renewable energy.</p>
+      </div>
+      <div class="mvv-block">
+        <span class="k">MISSION</span>
+        <h3>Dependable, affordable solar for every Filipino home and business.</h3>
+        <p>We empower every customer to reduce electricity costs, gain energy independence, and contribute to a cleaner environment through expert design, genuine components, and honest, professional service.</p>
+      </div>
+    </div>
+    <div class="mvv-divider"></div>
+    <div class="values-wrap">
+      <div class="values-copy">
+        <span class="k">CORE VALUES</span>
+        <h3>A cycle we return to on every install.</h3>
+        <p>Six values that feed back into each other — continuous improvement leads back to integrity on the next project.</p>
+      </div>
+      <div class="loop-wrap" id="loopWrap">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-label="Diagram of six core values arranged in a continuous loop">
+          <path id="loopCircle" class="loop-path" d="M 200,60 A 140,140 0 1 1 199,60" />
+          <g class="value-node" data-i="0"><circle cx="200" cy="60" r="44"/><text x="200" y="55" text-anchor="middle">Integrity</text></g>
+          <g class="value-node" data-i="1"><circle cx="331" cy="130" r="44"/><text x="331" y="125" text-anchor="middle">Quality</text></g>
+          <g class="value-node" data-i="2"><circle cx="331" cy="270" r="44"/><text x="331" y="265" text-anchor="middle">Reliability</text></g>
+          <g class="value-node" data-i="3"><circle cx="200" cy="340" r="48"/><text x="200" y="330" text-anchor="middle"><tspan x="200" dy="0">Customer-</tspan><tspan x="200" dy="14">Centered</tspan></text></g>
+          <g class="value-node" data-i="4"><circle cx="69" cy="270" r="44"/><text x="69" y="270" text-anchor="middle">Sustainability</text></g>
+          <g class="value-node" data-i="5"><circle cx="69" cy="130" r="44"/><text x="69" y="125" text-anchor="middle"><tspan x="69" dy="0">Continuous</tspan><tspan x="69" dy="14">Improvement</tspan></text></g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PACKAGES ================= -->
+<section class="packages" id="packages">
+  <div class="wrap">
+    <div class="pkg-head">
+      <div>
+        <span class="kicker">Compare all packages</span>
+        <h2>Start where your budget allows.</h2>
+        <p>Every tier includes materials and professional installation, and is built to upgrade.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Filter packages by series">
+        <button class="tab" role="tab" aria-selected="true" data-series="all">All</button>
+        <button class="tab" role="tab" aria-selected="false" data-series="6kW">6kW</button>
+        <button class="tab" role="tab" aria-selected="false" data-series="8kW">8kW</button>
+        <button class="tab" role="tab" aria-selected="false" data-series="12kW">12kW</button>
+      </div>
+    </div>
+
+    <div class="tier-grid" id="tierGrid">
+      <!-- cards injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY CHOOSE ================= -->
+<section class="why">
+  <div class="wrap">
+    <div class="why-head">
+      <span class="kicker">Why choose VJR</span>
+      <h2>Five reasons homeowners trust us with their roofs.</h2>
+    </div>
+    <div class="why-grid" id="whyGrid">
+      <div class="why-rail">
+        <svg viewBox="0 0 40 900" preserveAspectRatio="none" aria-hidden="true">
+          <path id="tracePath" class="trace-path" d="M20,10 V870"/>
+          <circle class="trace-dot" data-i="0" cx="20" cy="60" r="7"/>
+          <circle class="trace-dot" data-i="1" cx="20" cy="240" r="7"/>
+          <circle class="trace-dot" data-i="2" cx="20" cy="420" r="7"/>
+          <circle class="trace-dot" data-i="3" cx="20" cy="600" r="7"/>
+          <circle class="trace-dot" data-i="4" cx="20" cy="780" r="7"/>
+        </svg>
+      </div>
+      <div>
+        <div class="why-item">
+          <h3>Certified installers</h3>
+          <p>Trained specifically in Sungrow hybrid system installation.</p>
+        </div>
+        <div class="why-item">
+          <h3>Quality components</h3>
+          <p>Only genuine panels, inverters, and LiFePO₄ batteries.</p>
+        </div>
+        <div class="why-item">
+          <h3>Scalable designs</h3>
+          <p>Start small and upgrade as your budget and needs grow.</p>
+        </div>
+        <div class="why-item">
+          <h3>End-to-end service</h3>
+          <p>From site assessment to installation and after-sales support.</p>
+        </div>
+        <div class="why-item">
+          <h3>Safety first</h3>
+          <p>Proper grounding, protection devices, and code-compliant wiring.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="wrap contact-inner">
+    <div>
+      <span class="badge">Ready to go solar?</span>
+      <h2>Let's power your life <em>with the sun.</em></h2>
+      <p class="contact-copy">Reach out for a free site assessment. We'll walk your roof, size the right system for your usage, and give you a fixed price before any work begins.</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-row">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg></div>
+        <div><span>Phone / WhatsApp</span><a href="tel:+639625486272"><strong>0962-548-6272</strong></a></div>
+      </div>
+      <div class="contact-row">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></div>
+        <div><span>Owner</span><strong>Vince Joshua Recidoro</strong></div>
+      </div>
+      <div class="contact-row">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><span>Address</span><strong>Purok Pag-asa, Poblacion, Santo Niño, Surallah, South Cotabato</strong></div>
+      </div>
+      <div style="margin-top:20px;">
+        <a class="btn btn-primary" style="width:100%; justify-content:center;" href="https://wa.me/639625486272">Message us on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="foot">
+      <span>© 2026 Vjrtop — Solar Installation Solutions</span>
+      <span>Since 2023 · South Cotabato, Philippines</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ---------- Package data ----------
+  const packages = [
+    {series:'6kW', tier:'Entry', panels:'6 pcs (up to 18)', inverter:'1× Sungrow MG6RL', battery:'10.2 kWh', price:250000},
+    {series:'6kW', tier:'Mid', panels:'10 pcs (up to 18)', inverter:'1× Sungrow MG6RL', battery:'16.07 kWh', price:310000},
+    {series:'6kW', tier:'Max', panels:'18 pcs (full)', inverter:'1× Sungrow MG6RL', battery:'32.14 kWh', price:485000},
+    {series:'8kW', tier:'Mid', panels:'10 pcs (up to 24)', inverter:'1× Sungrow MG8RL', battery:'16.07 kWh', price:340000},
+    {series:'8kW', tier:'High', panels:'14 pcs (up to 24)', inverter:'1× Sungrow MG8RL', battery:'16.07 kWh', price:370000},
+    {series:'12kW', tier:'Premium', panels:'24 pcs (up to 36)', inverter:'2× Sungrow MG6RL', battery:'32.14 kWh', price:645000},
+  ];
+  const maxPrice = Math.max(...packages.map(p=>p.price));
+  const grid = document.getElementById('tierGrid');
+
+  function fmtPeso(n){ return '₱' + n.toLocaleString('en-PH'); }
+
+  function renderTiers(filter){
+    grid.innerHTML = '';
+    packages.filter(p => filter==='all' || p.series===filter).forEach((p, idx) => {
+      const card = document.createElement('div');
+      card.className = 'tier-card';
+      card.innerHTML = `
+        <div>
+          <div class="tier-tag">${p.series} SERIES</div>
+          <div class="tier-name">${p.tier}</div>
+        </div>
+        <div class="tier-specs">
+          <div><strong>Inverter</strong><br>${p.inverter}</div>
+          <div><strong>Panels</strong><br>${p.panels}</div>
+          <div><strong>Battery</strong><br>${p.battery}</div>
+        </div>
+        <div class="tier-price">
+          <div class="amount">${fmtPeso(p.price)} <span>installed</span></div>
+          <div class="price-bar-track"><div class="price-bar-fill" data-w="${(p.price/maxPrice*100).toFixed(0)}"></div></div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+    // animate bars in after render
+    requestAnimationFrame(()=>{
+      document.querySelectorAll('.price-bar-fill').forEach(el=>{
+        setTimeout(()=>{ el.style.width = el.dataset.w + '%'; }, 60);
+      });
+    });
+  }
+  renderTiers('all');
+
+  document.querySelectorAll('.tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected','false'));
+      tab.setAttribute('aria-selected','true');
+      renderTiers(tab.dataset.series);
+    });
+  });
+
+  // ---------- Scroll-triggered draw-ins ----------
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function onView(selector, cb){
+    const el = document.querySelector(selector);
+    if(!el) return;
+    if(reduceMotion){ cb(); return; }
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ cb(); io.unobserve(entry.target); }
+      });
+    }, {threshold:0.35});
+    io.observe(el);
+  }
+
+  onView('#loopWrap', ()=>{
+    document.getElementById('loopCircle').classList.add('drawn');
+    document.querySelectorAll('.value-node').forEach((node,i)=>{
+      setTimeout(()=> node.classList.add('shown'), 300 + i*220);
+    });
+  });
+
+  onView('#whyGrid', ()=>{
+    document.getElementById('tracePath').classList.add('drawn');
+    document.querySelectorAll('.trace-dot').forEach((dot,i)=>{
+      setTimeout(()=> dot.classList.add('shown'), 400 + i*420);
+    });
+  });
+</script>
+</body>
+</html>
