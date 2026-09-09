@@ -280,7 +280,28 @@
     .hero-grid, .intro-top, .mvv-top, .values-wrap, .contact-inner{ grid-template-columns:1fr; }
     .hero{ padding-top:110px; }
     .hero-art{ order:-1; max-width:520px; width:100%; min-height:360px; margin:0 auto 20px; }
+    .wrap{ padding-left:20px; padding-right:20px; }
+    .nav-inner{ padding-left:20px; padding-right:20px; }
+    .nav-cta{ padding:8px 12px; font-size:12px; white-space:nowrap; }
+    .hero-stats{ gap:18px; flex-wrap:wrap; }
+    .hero-stats div{ flex:1 1 120px; }
+    .contact-card{ padding:24px; }
     .why-grid{ grid-template-columns: 34px 1fr; }
+  }
+  @media (max-width: 560px){
+    .brand-text span{ font-size:10px; }
+    .hero{ min-height:auto; padding:104px 0 44px; }
+    .hero h1{ font-size:clamp(32px,11vw,46px); }
+    .hero-actions{ flex-direction:column; align-items:stretch; }
+    .hero-actions .btn{ justify-content:center; }
+    .hero-art{ min-height:230px; margin-bottom:0; }
+    .intro, .mvv, .packages, .why, .contact{ padding-top:72px; padding-bottom:72px; }
+    .feature-list{ grid-template-columns:1fr !important; gap:20px !important; margin-top:36px !important; }
+    .pkg-head{ align-items:stretch; }
+    .tabs{ margin-bottom:0; }
+    .tab{ flex:1 1 70px; padding:10px 12px; }
+    .contact-row div strong{ overflow-wrap:anywhere; }
+    .foot{ margin-top:48px; }
   }
   @media (prefers-reduced-motion: reduce){
     *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
@@ -323,7 +344,7 @@
 
     <div class="hero-art">
       <img class="hero-photo" src="vjrtop.jpg" alt="Solar panels installed across a residential rooftop in South Cotabato">
-      <svg viewBox="0 0 520 460 "img src="vjr-solar-setup.jpg" role=img aria-label="Illustration of a sunrise over a solar-panelled roof with connected circuit lines">
+      <svg viewBox="0 0 520 460" role="img" aria-label="Illustration of a sunrise over a solar-panelled roof with connected circuit lines">
         <!-- rays -->
         <g class="sun-core">
           <line class="ray" x1="260" y1="230" x2="260" y2="150" transform="rotate(0 260 230)"/>
@@ -523,7 +544,7 @@
       </div>
       <div class="contact-row">
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <div><span>Address</span><strong>Purok Pag-asa, Poblacion, Santo Niño, Surallah, South Cotabato</strong></div>
+        <div><span>Address</span><strong>Purok Pag-asa, Poblacion, Santo Niño, South Cotabato</strong></div>
       </div>
       <div style="margin-top:20px;">
         <a class="btn btn-primary" style="width:100%; justify-content:center;" href="https://wa.me/639625486272">Message us on WhatsApp</a>
